@@ -34,3 +34,12 @@ print(len(ls), '长度')
 for i in range(len(ls)):
     if i == 3:
         print(ls[i])
+
+employees = [1, 2]
+employees.append(3) 
+employees.insert(1, 4)
+employees.remove(4) # 删除某个值
+employees.pop(0)
+del employees[0]
+employees.clear()
+print(employees)
