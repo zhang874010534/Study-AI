@@ -43,3 +43,4 @@ employees.pop(0)
 del employees[0]
 employees.clear()
 print(employees)
+
