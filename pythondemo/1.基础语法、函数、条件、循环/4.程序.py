@@ -36,10 +36,10 @@ for i in range(len(ls)):
         print(ls[i])
 
 employees = [1, 2]
-employees.append(3) 
-employees.insert(1, 4)
+employees.append(3) # 增加元素
+employees.insert(1, 4) # 插入索引为1的元素
 employees.remove(4) # 删除某个值
-employees.pop(0)
+employees.pop(0) # 删除索引为0的元素
 del employees[0]
 employees.clear()
 print(employees)
