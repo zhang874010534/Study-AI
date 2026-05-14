@@ -1,4 +1,5 @@
-from decimal import Decimal
+from decimal import Decimal, getcontext
+# getcontext().prec = 2
 employee = [
     {
         'name': '张三',
@@ -23,5 +24,10 @@ print(total)
 print(f"平均金额为：{total/len(employee)}")
 print(0.1 + 0.2)
 
-result = Decimal("0.1") + Decimal("0.2")
-print(result == Decimal("0.3"))
+result = Decimal(16.12) + Decimal(14.27)
+print(result)
+
+decimalResult = Decimal("0.1") + Decimal("0.2")
+print(decimalResult)
+print(decimalResult == Decimal("0.3"))
+
