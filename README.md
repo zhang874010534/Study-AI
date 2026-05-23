@@ -75,4 +75,10 @@ LLM/RAG/Agent已经成为人工智能领域进步的关键技术，理解这三�
 
 ![image](./images/ad764e1e-8518-4d0b-ae64-7a3da80f7249.png)
 
-### AI Agent的定义与技术架构
+#### AI Agent的定义与技术架构
+
+![image-20260523100021530](./images/3a9c687d-e3e0-422b-a190-7debbf65333c.png)
+
+#### 手动模拟Agent流程图
+
+![img](./images/d3aa6f54-3e81-4f21-aa53-4dad2bd9f87f.png)
