@@ -82,3 +82,7 @@ LLM/RAG/Agent已经成为人工智能领域进步的关键技术，理解这三�
 #### 手动模拟Agent流程图
 
 ![img](./images/d3aa6f54-3e81-4f21-aa53-4dad2bd9f87f.png)
+
+#### LLMOps项目需求拆分与设计
+
+![d3aa6f54-3e81-4f21-aa53-4dad2bd9f87f](./images/c6017e1d-0c00-44b0-ad05-4e16a986df93.png)
