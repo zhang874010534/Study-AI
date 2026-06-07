@@ -86,3 +86,63 @@ LLM/RAG/Agent已经成为人工智能领域进步的关键技术，理解这三�
 #### LLMOps项目需求拆分与设计
 
 ![d3aa6f54-3e81-4f21-aa53-4dad2bd9f87f](./images/c6017e1d-0c00-44b0-ad05-4e16a986df93.png)
+
+#### 智能体、skills、工具、MCP
+
+用户
+ ↓
+智能体：理解用户要什么
+ ↓
+Skills：判断这类任务应该怎么做
+ ↓
+工具：执行具体动作
+ ↓
+MCP：连接外部系统里的工具/数据
+
+##### 智能体负责理解你要干嘛、判断要查什么、调用什么能力、最后组织回答。
+
+##### Skills：更像“封装好的专项能力 / 使用说明书”  一个SOP
+
+##### 工具：负责“干一个具体动作”  比如查订单工具 输入客户名，返回订单
+
+##### MCP 是一种把外部工具接进来的协议
+
+用户提问
+ ↓
+MaxKB 智能体理解：这是查销售数据
+ ↓
+发现 MCP 里有 query_database 工具
+ ↓
+调用 MCP Server：
+{
+  "tool": "query_database",
+  "arguments": {
+    "sql": "SELECT ..."
+  }
+}
+ ↓
+MCP Server 去数据库查询
+ ↓
+返回结果
+ ↓
+智能体组织成自然语言回答
+
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("order-mcp")
+
+@mcp.tool()
+def get_order(order_id: str) -> dict:
+    """
+    根据订单号查询订单信息
+    """
+    这里先写死，真实场景可以查数据库、调接口
+    return {
+        "order_id": order_id,
+        "status": "已发货",
+        "amount": 299,
+        "customer": "张三"
+    }
+
+if __name__ == "__main__":
+    mcp.run(transport="sse")
