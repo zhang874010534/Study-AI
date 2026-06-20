@@ -292,3 +292,11 @@ if __name__ == "__main__":
 模块下创建 __init__.py 文件代表当前目录为一个模块，并尽可能在 __init__.py 中使用
 
 __all__ 简化导出。
+
+### python常见指令
+
+- python -m venv .venv 虚拟环境
+
+### python常见包
+
+- 

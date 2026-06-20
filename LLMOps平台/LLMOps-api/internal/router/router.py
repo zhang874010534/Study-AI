@@ -17,6 +17,7 @@ class Router:
 
         # app_handler = AppHandler()
         bp.add_url_rule('/ping', view_func=self.app_handler.ping, methods=['GET'])
+        bp.add_url_rule('/app/completion', view_func=self.app_handler.completion, methods=['POST'])
 
         # 注册蓝图
         app.register_blueprint(bp)
