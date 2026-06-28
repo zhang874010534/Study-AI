@@ -1,17 +1,20 @@
 import os
+from asyncio import log
 
 from flask import request
 from openai import OpenAI
 from internal.schema.app_schema import CompletionReq
-
+from pgk.response import Response, HttpCode, success_json, validation_json
+from flask import jsonify
 api_key = os.getenv("ARK_API_KEY")
 client = OpenAI(base_url="https://ark.cn-beijing.volces.com/api/v3", api_key=api_key)
 class AppHandler:
 
     def completion(self):
-        req = CompletionReq()
+        query = request.json.get("query")
+        req = CompletionReq(query=query)
         if not req.validate():
-            return req.errors
+            return validation_json(req.errors)
 
         response = client.responses.create(
             model="doubao-seed-1-8-251228",
@@ -27,8 +30,19 @@ class AppHandler:
                 }
             ]
         )
+
+        content = response.output[1].content[0].text
         print(response)
-        return response.output[1].content[0].text
+        resp = Response(
+            code=HttpCode.SUCCESS,
+            message="success",
+            data={
+                "content": content,
+            }
+        )
+        return success_json({
+            "content": content,
+        }), 200
     def ping(self):
         return {
             "ping": "pong"

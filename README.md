@@ -300,3 +300,12 @@ __all__ 简化导出。
 ### python常见包
 
 - Flask-wtf   数据校验CSRF保护等 
+
+- cookiecutter   脚手架 比较类似于前端的vue-cli
+
+  **高频常用模板**：
+
+  - Web 开发：`cookiecutter-django`、`cookiecutter-flask`、`cookiecutter-fastapi`
+  - 包开发：`cookiecutter-pypackage`（标准 Python 开源包模板）
+
+- Copier    Cookiecutter 的进阶版，解决了旧模板生成后无法同步更新的痛点
