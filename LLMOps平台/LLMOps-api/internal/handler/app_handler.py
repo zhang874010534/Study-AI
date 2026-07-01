@@ -6,6 +6,8 @@ from openai import OpenAI
 from internal.schema.app_schema import CompletionReq
 from pgk.response import Response, HttpCode, success_json, validation_json
 from flask import jsonify
+from internal.exception import FailException
+
 api_key = os.getenv("ARK_API_KEY")
 client = OpenAI(base_url="https://ark.cn-beijing.volces.com/api/v3", api_key=api_key)
 class AppHandler:
@@ -44,6 +46,7 @@ class AppHandler:
             "content": content,
         }), 200
     def ping(self):
+        raise FailException("ping failed")
         return {
             "ping": "pong"
         }
