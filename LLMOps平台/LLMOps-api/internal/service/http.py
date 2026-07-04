@@ -1,4 +1,10 @@
+import os
+
 from flask import Flask
+from pgk.response import json, Response, HttpCode
+
+from internal.exception import CustomException
+
 from internal.router import Router
 from config import Config
 class Http(Flask):
@@ -12,9 +18,20 @@ class Http(Flask):
         self.config.from_object(conf)
 
     def _register_error_handler(self, error: Exception):
-        print("异常类型:", type(error))
-        print("异常内容 str:", str(error))
-        print("异常内容 repr:", repr(error))
-        print("异常参数 args:", error.args)
-        print("异常属性 dict:", getattr(error, "__dict__", {}))
-        return error.message
+        if isinstance(error, CustomException):
+            return json(Response(
+                code=error.code,
+                message=error.message,
+                data=error.data if error.data else {}
+            ))
+        print(self.debug, '----------')
+        print(os.getenv("FLASK_ENV"), '----')
+        if self.debug or os.getenv("FLASK_ENV") == "development":
+            raise error
+        else:
+            return json(Response(
+                code=HttpCode.FAIL,
+                message=str(error),
+                data={}
+            ))
+

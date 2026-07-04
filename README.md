@@ -299,6 +299,8 @@ __all__ 简化导出。
 
 ### python常见包
 
+- python-dotenv    `.env` 配置文件中读取键值对，加载到当前 Python 进程的环境变量中
+
 - Flask-wtf   数据校验CSRF保护等 
 
 - cookiecutter   脚手架 比较类似于前端的vue-cli
