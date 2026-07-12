@@ -4,7 +4,7 @@ from asyncio import log
 from flask import request
 from openai import OpenAI
 from internal.schema.app_schema import CompletionReq
-from pgk.response import Response, HttpCode, success_json, validation_json
+from pkg.response import Response, HttpCode, success_json, validation_json
 from flask import jsonify
 from internal.exception import FailException
 
@@ -19,7 +19,7 @@ class AppHandler:
             return validation_json(req.errors)
 
         response = client.responses.create(
-            model="doubao-seed-1-8-251228",
+            model="ep-20260707230632-rnsh2",
             input=[
                 {
                     "role": "user",

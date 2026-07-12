@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask
-from pgk.response import json, Response, HttpCode
+from pkg.response import json, Response, HttpCode
 
 from internal.exception import CustomException
 

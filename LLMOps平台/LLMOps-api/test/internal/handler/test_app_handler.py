@@ -1,8 +1,14 @@
-from pgk.response import HttpCode
-
+import pytest
+from pkg.response import HttpCode
 
 class TestAppHandler:
-    def test_completion(self, client):
-        resq = client.post("/app/completion", json={"query": "你好"})
+
+    @pytest.mark.parametrize("query", [None, "你是什么模型"])
+    def test_completion(self, query, client):
+        resq = client.post("/app/completion", json={"query": query})
         assert resq.status_code == 200
-        assert resq.json.get("code") == HttpCode.SUCCESS
+        if query is None:
+            assert resq.json.get("code") == HttpCode.VALIDATION_ERROR
+        else:
+            assert resq.json.get("code") == HttpCode.SUCCESS
+        print("响应内容", resq.json)

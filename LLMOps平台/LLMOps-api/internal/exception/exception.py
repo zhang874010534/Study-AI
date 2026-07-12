@@ -1,4 +1,4 @@
-from pgk.response import HttpCode
+from pkg.response import HttpCode
 from typing import Any
 from dataclasses import field
 

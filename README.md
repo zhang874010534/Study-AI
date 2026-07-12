@@ -311,3 +311,7 @@ __all__ 简化导出。
   - 包开发：`cookiecutter-pypackage`（标准 Python 开源包模板）
 
 - Copier    Cookiecutter 的进阶版，解决了旧模板生成后无法同步更新的痛点
+
+### Claude Code
+
+安装 winget install -e --id Anthropic.ClaudeCode
