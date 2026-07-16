@@ -293,6 +293,22 @@ if __name__ == "__main__":
 
 __all__ 简化导出。
 
+#### Flask-SQLALchemy  ORM
+
+ORM其实是对象映射关系（object-Relational Mapping），即将数据库中的表与面向对象编程中的类关联起来，它把数据库中的表映射
+为类，表中的行映射为类的实例，表中的列映射为类的属性。这样一来，就可以通过对类的操作来进行数据库的增删改查，而不必直接操
+作数据库，让程序员更加专注于业务逻辑，减少了与数据库交互的复杂性。
+
+- 优点
+  - 有语法提示，省去自已拼写SQL，保证SQL语法的正确性；
+  - ORM提供方言功能（dialect，可以转换为多种数据库语法），减少学习成本与迁移数据库的成本；
+  - 面向对象，可读性强，开发效率高；
+  - 防止sql注入攻击；
+  - 搭配数据库迁移，更新数据库方便；
+- 缺点
+  - 需要语法转换，效率比原生sql低；
+  - 复杂的查询往往语法比较复杂（可以使用原生sq代替）；
+
 ### python常见指令
 
 - python -m venv .venv 虚拟环境
@@ -311,6 +327,10 @@ __all__ 简化导出。
   - 包开发：`cookiecutter-pypackage`（标准 Python 开源包模板）
 
 - Copier    Cookiecutter 的进阶版，解决了旧模板生成后无法同步更新的痛点
+
+- flask-sqlalchemy    Flask 框架中用来操作数据库的扩展
+
+- psycopg2    Python 用来连接和操作 PostgreSQL 数据库的驱动库
 
 ### Claude Code
 
