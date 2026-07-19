@@ -7,15 +7,21 @@ from internal.exception import CustomException
 
 from internal.router import Router
 from config import Config
+from flask_sqlalchemy import SQLAlchemy
+
 class Http(Flask):
-    def __init__(self, *args, conf: Config, router: Router, **kwargs):
+    def __init__(self, *args, conf: Config, db: SQLAlchemy, router: Router, **kwargs):
         super().__init__(*args, **kwargs)
-        router.registerRouter(self)
+
+        self.config.from_object(conf)
 
         # 注册绑定异常错误
         self.register_error_handler(Exception, self._register_error_handler)
 
-        self.config.from_object(conf)
+        # 初始化数据库
+        db.init_app(self)
+
+        router.registerRouter(self)
 
     def _register_error_handler(self, error: Exception):
         if isinstance(error, CustomException):

@@ -309,9 +309,12 @@ ORM其实是对象映射关系（object-Relational Mapping），即将数据库�
   - 需要语法转换，效率比原生sql低；
   - 复杂的查询往往语法比较复杂（可以使用原生sq代替）；
 
+### ORM模型的增删改查 Flask-SQLALchemy
+
 ### python常见指令
 
 - python -m venv .venv 虚拟环境
+- pip freeze > requirements.txt 把当前 Python 环境里**所有已安装的第三方包 + 对应版本**，导出到 `requirements.txt` 文件，用来记录项目依赖，方便别人一键复现相同环境。
 
 ### python常见包
 

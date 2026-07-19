@@ -1,12 +1,18 @@
-from injector import inject, Injector
+from injector import inject, Injector, Module, Binder
 from internal.router import Router
 from internal.service.http import Http
+from internal.extension.database_extension import db
+from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
-conf = Config()
-injector = Injector()
+from module import ExtensionModule
 
-app = Http(__name__, conf=conf, router=injector.get(Router))
+conf = Config()
+
+
+injector = Injector([ExtensionModule])
+
+app = Http(__name__, conf=conf, db=injector.get(SQLAlchemy), router=injector.get(Router))
 
 if __name__ == "__main__":
     app.run(debug=True)
