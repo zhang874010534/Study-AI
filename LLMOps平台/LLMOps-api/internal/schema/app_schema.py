@@ -2,9 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Length
 
-
-
-
 class CompletionReq(FlaskForm):
     query = StringField("query", validators=[
         DataRequired(message="query is required"),
