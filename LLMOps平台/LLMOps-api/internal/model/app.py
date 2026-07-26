@@ -7,10 +7,10 @@ from sqlalchemy import Column, UUID, Text, String, DateTime, PrimaryKeyConstrain
 
 class App(db.Model):
     __tablename__ = 'app'
-    __table_args__ = {
+    __table_args__ = (
         PrimaryKeyConstraint('id', name='pk_app_id'),
-        Index('idx_app_account_id', 'account_id')
-    }
+        Index('idx_app_account_id', 'account_id'),
+    )
 
     id = Column(UUID, default=uuid.uuid4, nullable=False)
     account_id = Column(UUID, nullable=False)

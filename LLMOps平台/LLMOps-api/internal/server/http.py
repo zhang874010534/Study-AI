@@ -8,6 +8,7 @@ from internal.exception import CustomException
 from internal.router import Router
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
+from internal.model import App
 
 class Http(Flask):
     def __init__(self, *args, conf: Config, db: SQLAlchemy, router: Router, **kwargs):
@@ -20,6 +21,10 @@ class Http(Flask):
 
         # 初始化数据库
         db.init_app(self)
+        with self.app_context():
+            # 创建数据库表
+            # _ = App()
+            db.create_all()
 
         router.registerRouter(self)
 

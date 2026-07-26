@@ -1,17 +1,30 @@
 import os
 from asyncio import log
 
-from flask import request
+from flask import request, Flask
+from injector import inject
 from openai import OpenAI
 from internal.schema.app_schema import CompletionReq
-from pkg.response import Response, HttpCode, success_json, validation_json
+from pkg.response import Response, HttpCode, success_json, validation_json, success_message
 from flask import jsonify
 from internal.exception import FailException
+from internal.service import AppService
+from dataclasses import dataclass
+import uuid
 
 api_key = os.getenv("ARK_API_KEY")
 client = OpenAI(base_url="https://ark.cn-beijing.volces.com/api/v3", api_key=api_key)
+@inject
+@dataclass
 class AppHandler:
 
+    app_service: AppService
+    def create_app(self):
+        app = self.app_service.create_app()
+        return success_message(f"应用已经成功创建,应用ID为{app.id}")
+    def get_app(self, id: uuid.UUID):
+        app = self.app_service.get_app(id)
+        return success_message(f'应用{app.name}已经成功获取')
     def completion(self):
         query = request.json.get("query")
         req = CompletionReq(query=query)

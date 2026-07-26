@@ -1,7 +1,6 @@
-from injector import inject, Injector, Module, Binder
+from injector import Injector
 from internal.router import Router
-from internal.service.http import Http
-from internal.extension.database_extension import db
+from internal.server.http import Http
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
