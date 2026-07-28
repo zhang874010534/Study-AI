@@ -25,6 +25,9 @@ class AppHandler:
     def get_app(self, id: uuid.UUID):
         app = self.app_service.get_app(id)
         return success_message(f'应用{app.name}已经成功获取')
+    def update_app(self, id: uuid.UUID):
+        app = self.app_service.update_app(id)
+        return success_message(f'应用{app.name}已经成功更新')
     def completion(self):
         query = request.json.get("query")
         req = CompletionReq(query=query)

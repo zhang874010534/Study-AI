@@ -7,7 +7,9 @@ from internal.exception import CustomException
 
 from internal.router import Router
 from config import Config
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
+from pkg.sqlalchemy import SQLAlchemy
+
 from internal.model import App
 
 class Http(Flask):
