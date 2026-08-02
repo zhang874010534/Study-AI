@@ -1,6 +1,8 @@
 import os
 
 from flask import Flask
+from flask_migrate import Migrate
+
 from pkg.response import json, Response, HttpCode
 
 from internal.exception import CustomException
@@ -13,7 +15,7 @@ from pkg.sqlalchemy import SQLAlchemy
 from internal.model import App
 
 class Http(Flask):
-    def __init__(self, *args, conf: Config, db: SQLAlchemy, router: Router, **kwargs):
+    def __init__(self, *args, conf: Config, db: SQLAlchemy, migrate: Migrate, router: Router, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.config.from_object(conf)
@@ -23,6 +25,7 @@ class Http(Flask):
 
         # 初始化数据库
         db.init_app(self)
+        migrate.init_app(self, db, directory="internal/migration")
         with self.app_context():
             # 创建数据库表
             # _ = App()
