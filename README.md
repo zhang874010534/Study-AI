@@ -331,10 +331,26 @@ ORM其实是对象映射关系（object-Relational Mapping），即将数据库�
 
 - Copier    Cookiecutter 的进阶版，解决了旧模板生成后无法同步更新的痛点
 
-- flask-sqlalchemy    Flask 框架中用来操作数据库的扩展
+- flask-sqlalchemy    Flask 框架中用来操作数据库的扩展 
 
 - psycopg2    Python 用来连接和操作 PostgreSQL 数据库的驱动库
+
+- flask-migrate  用来管理 **Flask 项目数据库结构变更** 的扩展
+
+  - flask --app app.http.app db init 初始化迁移
+  - flask --app app.http.app db upgrade  迁移
+  - flask --app app.http.app db downgrade 回退
+  - flask --app app.http.app db downgrade base 回退到最初的版本
+
 
 ### Claude Code
 
 安装 winget install -e --id Anthropic.ClaudeCode
+
+### LangChain
+
+大模型一般有两种形态“呈现”在我们眼前，一种是训练好的那种二进制文件，另外一种是将大模型的二进制文件进行部署之后暴露出一些相应的接口。但是无论是哪种形式，LLM 只提供了一个非常基础的调用方式，当我们要构建一个复杂的 Chat Bot 时，就需要考虑如何保存聊天的上下文、如何进行网络检索、如何加载本地数据、如何便捷管理 Prompt 等等工程问题。
+
+甚至是当我们切换到不同的 LLM 时，模型的输入和输出结构差异都非常巨大，微量的需求就需要修改大量的代码，或者在业务代码中做大量的判断与识别，让代码可维护性极差；但是其实不同 LLM 的交互流程其实都非常接近，如下可以看成是一个基础聊天机器人的链条，传入提示词、输出对应的结果，流程如下：
+
+​				构造提示词 → LLMs → 模型生成结果 → 处理结果 → 最终结果
