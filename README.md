@@ -367,3 +367,8 @@ ORM其实是对象映射关系（object-Relational Mapping），即将数据库�
 - **langgraph**：通过将步骤构建为图中的边和节点，使用 LLMs 构建健壮且有状态的多参与者应用程序，让你自己精确控制 Agent 的执行流程、状态和分支。
 - **langserve**：将 LangChain 链部署为 REST API。
 - **langsmith**：一个开发平台，可以让你调试、测试、评估和监控 LLM 应用程序，并与 LangChain 无缝衔接。
+
+#### prompt组件
+
+![img](./images/06e286c094d75a4a082f7a1c5524357c.png)
+
