@@ -4,8 +4,8 @@ from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, HumanMess
 from langchain_core.messages import AIMessage, HumanMessage
 prompt = PromptTemplate.from_template("讲一个关于{subject}的笑话")
 
-print(prompt.format(subject="动物"))
-prompt_value = prompt.invoke({"subject": "动物"})
+print(prompt.format(subject="程序员"))
+prompt_value = prompt.invoke({"subject": "程序员"})
 print(prompt_value.to_string())
 print(prompt_value.to_messages())
 
@@ -21,7 +21,7 @@ chat_prompt_value = chat_prompt.invoke({
         HumanMessage("你是什么模型"),
         AIMessage("我是 GPT-5.6 Sol")
     ],
-    "subject": "动物",
+    "subject": "程序员",
 })
 
 print(chat_prompt_value)
