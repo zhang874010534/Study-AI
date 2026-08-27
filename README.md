@@ -372,3 +372,13 @@ ORM其实是对象映射关系（object-Relational Mapping），即将数据库�
 
 ![img](./images/06e286c094d75a4a082f7a1c5524357c.png)
 
+#### Model组件
+
+Model 是 LangChain 的核心组件，但是 LangChain 本身不提供自己的 LLM，而是提供了一个标准接口，用于封装不同类型的 LLM 进行交互，其中 LangChain 为两种类型的模型提供接口和集成：
+
+- **LLM**：使用纯文本作为输入和输出的大语言模型。
+- **Chat Model**：使用聊天消息列表作为输入并返回聊天消息的聊天模型。
+
+在 LangChain 中，无论是 **LLM** 亦或者 **Chat Model** 都可以接受 **PromptValue/字符串/消息列表** 作为参数，内部会根据模型的类型自动转换成字符串亦或者消息列表，屏蔽了不同模型的差异。
+
+![ea727d7e-e7f8-4684-9a12-5751b19d379d](./images/ea727d7e-e7f8-4684-9a12-5751b19d379d.png)
