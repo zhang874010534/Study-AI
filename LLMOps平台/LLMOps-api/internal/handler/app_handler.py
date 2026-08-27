@@ -35,7 +35,7 @@ class AppHandler:
             return validation_json(req.errors)
 
         response = client.responses.create(
-            model="ep-20260707230632-rnsh2",
+            model="ep-20260827220313-29tvz",
             input=[
                 {
                     "role": "user",
