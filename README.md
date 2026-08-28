@@ -382,3 +382,7 @@ Model 是 LangChain 的核心组件，但是 LangChain 本身不提供自己的 
 在 LangChain 中，无论是 **LLM** 亦或者 **Chat Model** 都可以接受 **PromptValue/字符串/消息列表** 作为参数，内部会根据模型的类型自动转换成字符串亦或者消息列表，屏蔽了不同模型的差异。
 
 ![ea727d7e-e7f8-4684-9a12-5751b19d379d](./images/ea727d7e-e7f8-4684-9a12-5751b19d379d.png)
+
+#### Message组件
+
+![a04acfa0-1742-4972-833a-6389f9f2f42b](./images/efe2be3c-540d-4846-8c9f-e673513de7e6.png)
