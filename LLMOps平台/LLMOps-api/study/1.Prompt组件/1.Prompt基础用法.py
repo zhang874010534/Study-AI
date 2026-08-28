@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder, AIMessagePromptTemplate
-from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 prompt = PromptTemplate.from_template("讲一个关于{subject}的笑话")
 
 print(prompt.format(subject="程序员"))
