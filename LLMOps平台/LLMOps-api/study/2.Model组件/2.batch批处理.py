@@ -19,8 +19,11 @@ llm = ChatOpenAI(
     api_key=api_key,
 )
 
-ai_message = llm.invoke(prompt.invoke({"query": "现在是几点,讲一个笑话给我"}))
+ai_messages = llm.batch([
+    prompt.invoke({"query": "现在是几点,讲一个笑话给我"}),
+    prompt.invoke({"query": "晚上好"}),
+])
 
-print(ai_message.type)
-print(ai_message.content)
-print(ai_message.response_metadata)
+for ai_message in ai_messages:
+    print(ai_message.content)
+    print("-----------------")
