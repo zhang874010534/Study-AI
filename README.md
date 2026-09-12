@@ -386,3 +386,43 @@ Model 是 LangChain 的核心组件，但是 LangChain 本身不提供自己的 
 #### Message组件
 
 ![a04acfa0-1742-4972-833a-6389f9f2f42b](./images/efe2be3c-540d-4846-8c9f-e673513de7e6.png)
+
+#### OutputParser
+
+我们在使用大语言模型的时候，无论是使用 LangChain，还是直接使用模型的 API，都会遇到大语言模型的输出解析问题，以 OpenAI 的模型为例：
+
+```python
+from langchain_openai import ChatOpenAI()
+
+llm = ChatOpenAI()
+
+# 示例1
+llm.invoke("告诉我1+1等于几？")  # 输出：1 + 1 等于 2。
+
+# 示例2
+llm.invoke("告诉我3个动物的名字。")  
+# 输出：好的，这里有三种动物的名字：
+# \n\n1. 狮子\n2. 大熊猫\n3. 斑马
+
+# 示例3
+llm.invoke("给我一个json数据，键为a和b，值为任意的整型。")
+# 输出：{\n    "a": 10,\n    "b": 20\n}
+```
+
+修改后:
+
+```python
+from langchain_openai import ChatOpenAI()
+
+llm = ChatOpenAI()
+
+# 示例1，输出：2
+llm.invoke("告诉我1+1等于几？除了答案其他内容均不要返回。")
+
+# 示例2，输出：1.老虎\n2.狮子\n3.斑马
+llm.invoke("告诉我3个动物的名字。返回示例：1.狮子\n2.大熊猫")
+
+# 示例3，输出：{"a": 10, "b": 20}
+llm.invoke("给我一个json数据，键为a和b，值为任意的整型。除了json数据，其他内容均不要返回。")
+```
+
