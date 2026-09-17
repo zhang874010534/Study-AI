@@ -6,7 +6,7 @@ from internal.server.http import Http
 from pkg.sqlalchemy import SQLAlchemy
 
 from config import Config
-from .module import ExtensionModule
+from module import ExtensionModule
 
 conf = Config()
 

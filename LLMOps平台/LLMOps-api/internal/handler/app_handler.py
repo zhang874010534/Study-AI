@@ -3,14 +3,16 @@ from asyncio import log
 
 from flask import request, Flask
 from injector import inject
+from langchain_core.prompts import ChatPromptTemplate
 from openai import OpenAI
 from internal.schema.app_schema import CompletionReq
 from pkg.response import Response, HttpCode, success_json, validation_json, success_message
-from flask import jsonify
 from internal.exception import FailException
 from internal.service import AppService
 from dataclasses import dataclass
 import uuid
+from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
 
 api_key = os.getenv("ARK_API_KEY")
 client = OpenAI(base_url="https://ark.cn-beijing.volces.com/api/v3", api_key=api_key)
@@ -34,30 +36,21 @@ class AppHandler:
         if not req.validate():
             return validation_json(req.errors)
 
-        response = client.responses.create(
+        prompt = ChatPromptTemplate.from_template("{query}")
+
+        llm = ChatOpenAI(
             model="ep-20260827220313-29tvz",
-            input=[
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "input_text",
-                            "text": query,
-                        },
-                    ],
-                }
-            ]
+            api_key=os.getenv("ARK_API_KEY"),
+            base_url="https://ark.cn-beijing.volces.com/api/v3"
         )
 
-        content = response.output[1].content[0].text
-        print(response)
-        resp = Response(
-            code=HttpCode.SUCCESS,
-            message="success",
-            data={
-                "content": content,
-            }
-        )
+        # 发起请求
+        ai_message = llm.invoke(prompt.invoke({
+            "query": query,
+        }))
+        parser = StrOutputParser()
+        content = parser.parse(ai_message)
+
         return success_json({
             "content": content,
         }), 200
