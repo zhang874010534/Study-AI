@@ -426,3 +426,69 @@ llm.invoke("告诉我3个动物的名字。返回示例：1.狮子\n2.大熊猫"
 llm.invoke("给我一个json数据，键为a和b，值为任意的整型。除了json数据，其他内容均不要返回。")
 ```
 
+#### StrOutputParser
+
+把大模型返回的 `AIMessage` 转成普通字符串。
+
+```
+from langchain_core.output_parsers import StrOutputParser
+
+parser = StrOutputParser()
+result = parser.invoke(ai_message)
+```
+
+流程：
+
+```
+AIMessage → str
+```
+
+------
+
+#### JsonOutputParser
+
+把大模型返回结果解析成 JSON，也就是 Python 的 `dict`。
+
+```
+from langchain_core.output_parsers import JsonOutputParser
+
+parser = JsonOutputParser(
+    pydantic_object=Joke
+)
+```
+
+##### get_format_instructions()
+
+根据定义的数据结构，自动生成“要求大模型按指定 JSON 格式输出”的提示词。
+
+```
+parser.get_format_instructions()
+```
+
+常见写法：
+
+```
+prompt = ChatPromptTemplate.from_template(
+    "{format_instructions}\n{query}"
+).partial(
+    format_instructions=parser.get_format_instructions()
+)
+
+chain = prompt | llm | parser
+```
+
+流程：
+
+```
+AIMessage → JSON → dict
+```
+
+##### 区别
+
+| Parser结果         | 类型   |
+| ------------------ | ------ |
+| `StrOutputParser`  | `str`  |
+| `JsonOutputParser` | `dict` |
+
+#### LCEL表达式
+

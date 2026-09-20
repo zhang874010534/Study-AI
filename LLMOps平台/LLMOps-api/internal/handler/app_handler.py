@@ -49,7 +49,7 @@ class AppHandler:
             "query": query,
         }))
         parser = StrOutputParser()
-        content = parser.parse(ai_message)
+        content = parser.invoke(ai_message)
 
         return success_json({
             "content": content,
