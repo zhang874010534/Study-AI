@@ -45,12 +45,14 @@ class AppHandler:
         )
 
         # 发起请求
-        ai_message = llm.invoke(prompt.invoke({
-            "query": query,
-        }))
+        # ai_message = llm.invoke(prompt.invoke({
+        #     "query": query,
+        # }))
         parser = StrOutputParser()
-        content = parser.invoke(ai_message)
+        # content = parser.invoke(ai_message)
 
+        chain = prompt | llm | parser
+        content = chain.invoke({"query": query})
         return success_json({
             "content": content,
         }), 200
